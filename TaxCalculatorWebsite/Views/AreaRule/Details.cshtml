@@ -1,0 +1,42 @@
+﻿@model Application.DTOs.AreaRules.GetAreaRuleDTO
+
+@{
+    ViewData["Title"] = "Detail of Area Rule";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12 py-3 bg-secondary bg-opacity-10 text-end rounded-3 d-flex justify-content-between align-items-center">
+        <a class="btn btn-warning" asp-action="Index">Back To List</a>
+        @Html.ActionLink("Edit", "Edit", new { @id=Model.Id },new{ @class="btn btn-primary px-5"})
+    </div>
+    <div class="col-12 py-3">
+        <div class="row">
+            <div class="col-11 col-md-6 col-lg-4 mx-auto rounded-3 p-3 border shadow shadow-sm">
+                <div class="row px-0 mx-0">
+                    <div class="col-12 d-flex flex-column bg-light rounded-top py-2">
+                        <p class="mb-0 small text-muted">@Html.DisplayNameFor(model => model.Area.Name)</p>
+                        <p class="mb-0 fw-bold">@Html.DisplayFor(model => model.Area.Name)</p>
+                    </div>
+                    <div class="col-12 d-flex flex-column bg-secondary bg-opacity-10 py-2">
+                        <p class="mb-1 small text-muted">@Html.DisplayNameFor(model => model.Year)</p>
+                        <p class="mb-0 fw-bold">@Html.DisplayFor(model => model.Year)</p>
+                    </div>
+                    <div class="col-12 d-flex flex-column bg-light rounded-bottom py-2">
+                        <p class="mb-0 small text-muted">@Html.DisplayNameFor(model => model.StartTime)</p>
+                        <p class="mb-0 fw-bold">@Html.DisplayFor(model => model.StartTime)</p>
+                    </div>
+                    <div class="col-12 d-flex flex-column bg-secondary bg-opacity-10 py-2">
+                        <p class="mb-1 small text-muted">@Html.DisplayNameFor(model => model.EndTime)</p>
+                        <p class="mb-0 fw-bold">@Html.DisplayFor(model => model.EndTime)</p>
+                    </div>
+                    <div class="col-12 d-flex flex-column bg-light rounded-bottom py-2">
+                        <p class="mb-0 small text-muted">@Html.DisplayNameFor(model => model.TaxFee)</p>
+                        <p class="mb-0 fw-bold">@Html.DisplayFor(model => model.TaxFee)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

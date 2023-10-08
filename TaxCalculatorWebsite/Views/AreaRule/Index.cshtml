@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Application.DTOs.AreaRules.GetAreaRuleDTO>
+
+@{
+    ViewData["Title"] = "Area Rules";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12 py-3 bg-secondary bg-opacity-10 text-end rounded-3 d-flex justify-content-between align-items-center">
+        <p class="mb-0 bg-warning text-dark px-2 badge @(TempData["Error"] == null ? "invisible":"")">
+            @TempData["Error"]
+        </p>
+        @if (ViewBag.AreaId != null)
+        {
+            <a class="btn btn-success px-4" asp-action="Create" asp-route-id="@ViewBag.AreaId">Create New Area</a>
+        }
+        else
+        {
+            <a class="btn btn-success px-4" asp-action="Create">Create New Area</a>
+        }
+    </div>
+    <div class="col-12 py-2">
+        <div class="table-responsive">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Area.Name)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.Year)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.StartTime)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.EndTime)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.TaxFee)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Area.Name)
+                            </td>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.Year)
+                            </td>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.StartTime)
+                            </td>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.EndTime)
+                            </td>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.TaxFee)
+                            </td>
+                            <td class="text-end text-nowrap">
+                                @Html.ActionLink("Edit", "Edit", new { @id=item.Id },new { @class="btn btn-sm btn-primary px-4"}) |
+                                @Html.ActionLink("Details", "Details", new { @id=item.Id },new { @class="btn btn-sm btn-info px-2"}) |
+                                @Html.ActionLink("Delete", "Delete", new { @id=item.Id },new { @class="btn btn-sm btn-danger px-2"})
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

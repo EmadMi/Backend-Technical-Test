@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Application.DTOs.Vehicles.GetVehicleDTO>
+
+@{
+    ViewData["Title"] = "Vehicles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12 py-3 bg-secondary bg-opacity-10 text-end rounded-3 d-flex justify-content-between align-items-center">
+        <p class="mb-0 bg-warning text-dark px-2 badge @(TempData["Error"] == null ? "invisible":"")">
+            @TempData["Error"]
+        </p>
+        <a class="btn btn-success px-4" asp-action="Create">Create New Vehicle</a>
+    </div>
+    <div class="col-12 py-2">
+        <div class="table-responsive">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.IsTaxFree)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.Order)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td class="text-center">
+                                @if (item.IsTaxFree)
+                                {
+                                    <span class="material-icons-round text-success fs-6">
+                                        check_box
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="material-icons-round text-danger fs-6">
+                                        disabled_by_default
+                                    </span>
+                                }
+                            </td>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.Order)
+                            </td>
+                            <td class="text-end text-nowrap">
+                                @Html.ActionLink("Edit", "Edit", new { @id=item.Id },new { @class="btn btn-sm btn-primary px-4"}) |
+                                @Html.ActionLink("Details", "Details", new { @id=item.Id },new { @class="btn btn-sm btn-info px-2"}) |
+                                @Html.ActionLink("Delete", "Delete", new { @id=item.Id },new { @class="btn btn-sm btn-danger px-2"})
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

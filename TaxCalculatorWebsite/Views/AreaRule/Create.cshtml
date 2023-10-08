@@ -1,0 +1,69 @@
+﻿@model TaxCalculatorWebsite.Models.ChildModels.AreaRules.CreateAreaRulesLocalDTO
+
+@{
+    ViewData["Title"] = "Create Area Rule";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="/lib/dayjs.1.11.10/dist/dayjs.min.js"></script>
+    <script src="/lib/timepicker.1.1.0/dist/js/timepicker-bs4.js"></script>
+    <script src="/pages/arearules/create/js/arearulecreate.js"></script>
+}
+
+<form asp-action="Create">
+    <div class="row">
+        <div class="col-12 py-3 bg-secondary bg-opacity-10 text-end rounded-3 d-flex justify-content-between align-items-center">
+            <a class="btn btn-warning" asp-action="Index">Back To List</a>
+            <p class="mb-0 bg-danger text-light px-2 badge @(TempData["CreateError"] == null ? "invisible":"")">
+                @TempData["CreateError"]
+            </p>
+            <input type="submit" value="Create" class="btn btn-success px-5" />
+        </div>
+        <div class="col-12 py-3">
+            <div class="row">
+                <div class="col-11 col-md-6 col-lg-4 mx-auto rounded-3 p-3 border shadow shadow-sm">
+                    <div class="row px-0 mx-0">
+                        <div class="col-12 d-flex flex-column bg-light rounded-top py-2">
+                            <div class="form-floating">
+                                <select asp-for="AreaId" class="form-select" asp-items="Model.Areas" placeholder=" "></select>
+                                <label asp-for="AreaId" class="text-muted small"></label>
+                                <span asp-validation-for="AreaId" class="text-danger small"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 d-flex flex-column bg-light rounded-top py-2">
+                            <div class="form-floating">
+                                <input asp-for="Year" min="1993" max="2040" class="form-control" placeholder=" " />
+                                <label asp-for="Year" class="text-muted small"></label>
+                                <span asp-validation-for="Year" class="text-danger small"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 d-flex flex-column bg-light rounded-top py-2">
+                            <div class="form-floating">
+                                <input asp-for="StartTime" class="form-control timepicker" placeholder=" " data-format="HH:mm:ss" data-toggle="timepicker" />
+                                <label asp-for="StartTime" class="text-muted small"></label>
+                                <span asp-validation-for="StartTime" class="text-danger small"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 d-flex flex-column bg-light rounded-top py-2">
+                            <div class="form-floating">
+                                <input asp-for="EndTime" class="form-control timepicker" placeholder=" " data-format="HH:mm:ss" data-toggle="timepicker" />
+                                <label asp-for="EndTime" class="text-muted small"></label>
+                                <span asp-validation-for="EndTime" class="text-danger small"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 d-flex flex-column bg-secondary bg-opacity-10 py-2">
+                            <div class="form-floating">
+                                <input asp-for="TaxFee" min="0" class="form-control" type="number" placeholder=" " />
+                                <label asp-for="TaxFee" class="text-muted small"></label>
+                                <span asp-validation-for="TaxFee" class="text-danger small"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

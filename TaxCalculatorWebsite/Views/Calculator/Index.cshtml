@@ -1,0 +1,93 @@
+﻿@model TaxCalculatorWebsite.Models.ChildModels.Calculators.GetTaxCalculatorLocalDTO
+
+@{
+    ViewData["Title"] = "Calculator";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Styles{
+    <link href="/lib/datetimepicker.4.2.6/dist/css/mds.bs.datetimepicker.style.css" rel="stylesheet" />
+}
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="/lib/datetimepicker.4.2.6/dist/js/mds.bs.datetimepicker.js"></script>
+    <script src="/pages/calculators/index/js/index.js"></script>
+}
+<form asp-action="Index">
+    <div class="row">
+        <div class="col-12 py-3 bg-secondary bg-opacity-10 text-end rounded-3 d-flex justify-content-between align-items-center">
+            <p class="mb-0 bg-danger text-light px-2 badge @(TempData["CalculateError"] == null ? "invisible":"")">
+                @TempData["CalculateError"]
+            </p>
+            <input type="submit" value="Calculate" class="btn btn-primary px-5" />
+        </div>
+        <div class="col-12 py-3">
+            <div class="row gap-3">
+                <div class="col-11 col-md-6 col-lg-4 mx-auto rounded-3 p-3 border shadow shadow-sm">
+                    <div class="row px-0 mx-0">
+                        <div class="col-12 d-flex flex-column bg-light rounded-top py-2">
+                            <div class="form-floating">
+                                <select asp-for="AreaId" class="form-select" asp-items="Model.Areas" placeholder=" "></select>
+                                <label asp-for="AreaId" class="text-muted small"></label>
+                                <span asp-validation-for="AreaId" class="text-danger small"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 d-flex flex-column bg-secondary bg-opacity-10 rounded-top py-2">
+                            <div class="form-floating">
+                                <select asp-for="VehicleId" class="form-select" asp-items="Model.Vehicles" placeholder=" "></select>
+                                <label asp-for="VehicleId" class="text-muted small"></label>
+                                <span asp-validation-for="VehicleId" class="text-danger small"></span>
+                            </div>
+                        </div>
+                        @{
+                            int PassDateTimeCount = 0;
+                            foreach (var PassDateTime in Model.PassDateTimeList)
+                            {
+                                <div class="col-12 d-flex flex-column bg-light rounded-top py-2">
+                                    <div class="form-floating">
+                                        <input asp-for="PassDateTimeList[PassDateTimeCount].PassDateTime" class="form-control" placeholder=" " />
+                                        <label asp-for="PassDateTimeList[PassDateTimeCount].PassDateTime" class="text-muted small"></label>
+                                        <span asp-validation-for="PassDateTimeList[PassDateTimeCount].PassDateTime" class="text-danger small"></span>
+                                    </div>
+                                </div>
+                                PassDateTimeCount++;
+                            }
+                        }
+                        <div id="dvAddPassDateTime" class="col-12 mt-2">
+                            <button type="button" class="btn btn-warning w-100" onclick="AddNewPassDateTime();">
+                                Add New Pass Date and Time
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                @if (ViewBag.State != null)
+                {
+                    <div class="col-11 col-md-6 col-lg-4 mx-auto rounded-3 p-3 border shadow shadow-sm position-sticky" style="height:200px;top:5%;">
+                        <div class="row px-0 mx-0">
+                            <div class="col-12 text-center">
+                                <h5>Calculation Result</h5>
+                            </div>
+                            <div class="col-12 d-flex flex-column bg-light rounded-top py-2">
+                                <p class="mb-0 small text-muted"> @Html.DisplayNameFor(model => model.RealTaxFee)</p>
+                                <p class="mb-0 fw-bold">@Html.DisplayFor(model => model.RealTaxFee) SEK</p>
+                            </div>
+                            <div class="col-12 d-flex flex-column bg-secondary bg-opacity-10 rounded-top py-2">
+                                <p class="mb-0 small text-muted"> @Html.DisplayNameFor(model => model.TaxFee)</p>
+                                <p class="mb-0 fw-bold">@Html.DisplayFor(model => model.TaxFee) SEK</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</form>
+
+<div id="dvPassDateTimeTemplate" class="col-12 d-flex flex-column rounded-top py-2 d-none">
+    <div class="form-floating">
+        <input id="#GeneratedInputId" name="#GeneratedInputName" required type="datetime-local" class="form-control" placeholder=" " data-val="true" data-val-required="Pass Date and Time is required" />
+        <label for="#GeneratedInputId" class="text-muted small">Pass Date and Time</label>
+        <span class="text-danger small field-validation-valid" data-valmsg-for="#GeneratedInputName" data-valmsg-replace="true"></span>
+    </div>
+</div>

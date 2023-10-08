@@ -1,0 +1,45 @@
+﻿@model Application.DTOs.Vehicles.GetVehicleDTO
+
+@{
+    ViewData["Title"] = "Detail of Vehicle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12 py-3 bg-secondary bg-opacity-10 text-end rounded-3 d-flex justify-content-between align-items-center">
+        <a class="btn btn-warning" asp-action="Index">Back To List</a>
+        @Html.ActionLink("Edit", "Edit", new { @id=Model.Id },new{ @class="btn btn-primary px-5"})
+    </div>
+    <div class="col-12 py-3">
+        <div class="row">
+            <div class="col-11 col-md-6 col-lg-4 mx-auto rounded-3 p-3 border shadow shadow-sm">
+                <div class="row px-0 mx-0">
+                    <div class="col-12 d-flex flex-column bg-light rounded-top py-2">
+                        <p class="mb-0 small text-muted"> @Html.DisplayNameFor(model => model.Name)</p>
+                        <p class="mb-0 fw-bold">@Html.DisplayFor(model => model.Name)</p>
+                    </div>
+                    <div class="col-12 d-flex flex-column bg-secondary bg-opacity-10 py-2">
+                        <p class="mb-1 small text-muted"> @Html.DisplayNameFor(model => model.IsTaxFree)</p>
+                        @if (Model.IsTaxFree)
+                        {
+                            <span class="material-icons-round text-success fs-6">
+                                check_box
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="material-icons-round text-danger fs-6">
+                                disabled_by_default
+                            </span>
+                        }
+                    </div>
+                    <div class="col-12 d-flex flex-column bg-light rounded-bottom py-2">
+                        <p class="mb-0 small text-muted"> @Html.DisplayNameFor(model => model.Order)</p>
+                        <p class="mb-0 fw-bold">@Html.DisplayFor(model => model.Order)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>

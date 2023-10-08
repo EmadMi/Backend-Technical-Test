@@ -1,0 +1,35 @@
+﻿@model Application.DTOs.Vehicles.DeleteVehicleDTO
+
+@{
+    ViewData["Title"] = "Delete Vehicle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form asp-action="Delete">
+    <div class="row">
+        <div class="col-12 py-3">
+            <div class="row">
+                <div class="col-11 col-md-6 col-lg-4 mx-auto rounded-3 p-3 border shadow shadow-sm">
+                    <div class="row px-0 mx-0">
+                        <div class="col-12 d-flex flex-column bg-light rounded py-2 mb-3 mt-3">
+                            <h5>Are you sure you want to delete @(Model.Name) Vehicle?</h5>
+                        </div>
+                        <div class="col-6 text-center">
+                            <a class="btn btn-light w-100" asp-action="Index">Back To List</a>
+                        </div>
+                        <div class="col-6">
+                            <input type="submit" value="Delete" class="btn btn-danger w-100" />
+                            <input asp-for="Id" type="hidden" />
+                            <input asp-for="Name" type="hidden" />
+                        </div>
+                        <div class="col-12">
+                            <p class="mb-0 bg-danger text-light px-2 badge @(TempData["DeleteError"] == null ? "invisible":"")">
+                                @TempData["DeleteError"]
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
